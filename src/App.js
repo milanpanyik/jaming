@@ -1,23 +1,58 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import Searching from "./components/Searching";
+import Results from "./components/Results";
+import "./App.css";
+import Playlist from "./components/Playlist";
 
 function App() {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedTracks, setSelectedTracks] = useState([]);
+
+    
+
+
+  const handleSave = (playlistName) => {
+    alert(`${playlistName} saved, thank you, good day!`);
+    setSelectedTracks([]);
+
+  };
+  
+  const handleSearch = (term) => {
+    setSearchTerm(term);
+  };
+
+  const handleTrackSelection = (track) => {
+    if(!selectedTracks.includes(track)){
+      const newSelectedTracks = [...selectedTracks, track];
+       setSelectedTracks(newSelectedTracks);
+    }
+      
+   
+  };
+
+  const handleTrackDeletion = (trackId) => {
+    const newSelectedTracks = selectedTracks.filter(track => track.id !== trackId) 
+    setSelectedTracks(newSelectedTracks);
+  };
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {/* Body */}
+      <div>
+        <h1 className="header">Jam<span>mmmmmmmmmmmmmmmmmmmmmmmm</span>ing</h1>
+
+        <Searching className="Searching" onSearch={handleSearch} />
+      </div>
+
+      <div className="columns">
+        <div>
+        <Results   searchTerm={searchTerm}  selectTrack={handleTrackSelection} />
+        </div>
+        <div>
+        <Playlist onSave={handleSave} tracks={selectedTracks}  deleteTrack={handleTrackDeletion} />
+        </div>
+      </div>
     </div>
   );
 }
