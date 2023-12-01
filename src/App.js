@@ -24,6 +24,7 @@ function App() {
   const handleTrackSelection = (track) => {
     if(!selectedTracks.includes(track)){
       const newSelectedTracks = [...selectedTracks, track];
+      // eslint-disable-next-line no-unused-vars
        setSelectedTracks(newSelectedTracks);
     }
       

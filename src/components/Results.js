@@ -5,6 +5,7 @@ const Results = ({ searchTerm, selectTrack}) => {
   const [songs, setSongs] = useState([]);
 
   useEffect(() => {
+    // eslint-disable-next-line no-unused-vars
     const searchSong = async () => {
       const url =
         "https://deezerdevs-deezer.p.rapidapi.com/search?q=" + searchTerm;
